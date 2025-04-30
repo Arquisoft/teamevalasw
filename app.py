@@ -65,17 +65,20 @@ def evaluate():
                     "participacion": row["participacion"],
                     "cumplimiento": row["cumplimiento"],
                     "git": row["git"],
+                    "comment": row["comment"]
                 }
 
     if request.method == 'POST':
         evaluations = []
         for user in group_users['user']:
+            print(request.form[f'comment_{user}'])
             evaluation = {
                 'evaluatee': user,
                 'respeto_empatia': int(request.form[f'respeto_{user}']),
                 'participacion': int(request.form[f'participacion_{user}']),
                 'cumplimiento': int(request.form[f'cumplimiento_{user}']),
-                'git': int(request.form[f'git_{user}'])
+                'git': int(request.form[f'git_{user}']),
+                'comment': request.form[f'comment_{user}']
             }
             evaluations.append(evaluation)
         save_evaluation(username, evaluations)

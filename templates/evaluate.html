@@ -32,6 +32,8 @@
           value="{{ previous_evals.get(user.user, {}).get('git', 2) }}"
           oninput="this.nextElementSibling.value = this.value">
         <output>{{ previous_evals.get(user.user, {}).get('git', 2) }}</output>
+        <label>Comentario:</label>
+        <input type="text" style="width:100%" name="comment_{{ user.user }}" value="{{ previous_evals.get(user.user, {}).get('comment', '') }}"/>
       {% endfor %}
       <br><br>
       <button type="submit">Enviar Evaluaciones</button>
