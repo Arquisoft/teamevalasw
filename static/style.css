@@ -20,6 +20,10 @@ h2, h3 {
     color: #004085;
 }
 
+.info{
+    width: 100%;
+}
+
 label {
     display: block;
     margin-top: 10px;

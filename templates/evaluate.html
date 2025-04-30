@@ -1,12 +1,13 @@
 <!doctype html>
 <html>
 <head>
-  <title>Evaluate Team</title>
+  <title>Evaluar equipo</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <div class="container">
-    <h2>Evaluate Your Team Members (Team: {{group_name}})</h2>
+    <h2>Evalua a tus miembros de equipo (Equipo: {{group_name}})</h2>
+    <img src="{{ url_for('static', filename='image.png') }}" alt="Info" class="info">
     <form method="post">
       {% for user in group_users.itertuples() %}
         <h3>{{ user.name }} {{ user.surname }}</h3>
