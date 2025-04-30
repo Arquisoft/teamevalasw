@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Evaluate Team</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Evaluate Your Team Members (Team: {{group_name}})</h2>
+    <form method="post">
+      {% for user in group_users.itertuples() %}
+        <h3>{{ user.name }} {{ user.surname }}</h3>
+        <label>Respeto y empatía (1-4): </label>
+        <input type="range" name="respeto_{{ user.user }}" min="1" max="4"
+          value="{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}"
+          oninput="this.nextElementSibling.value = this.value">
+        <output>{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}</output>
+        
+        <label>Participación activa (1-4):</label>
+        <input type="range" name="participacion_{{ user.user }}" min="1" max="4"
+          value="{{ previous_evals.get(user.user, {}).get('participacion', 2) }}"
+          oninput="this.nextElementSibling.value = this.value">
+        <output>{{ previous_evals.get(user.user, {}).get('participacion', 2) }}</output>
+        <label>Cumplimiento de tareas (1-4):</label>
+        <input type="range" name="cumplimiento_{{ user.user }}" min="1" max="4"
+          value="{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}"
+          oninput="this.nextElementSibling.value = this.value">
+        <output>{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}</output>
+        <label>Colaboración en Git (1-4):</label>
+        <input type="range" name="git_{{ user.user }}" min="1" max="4"
+          value="{{ previous_evals.get(user.user, {}).get('git', 2) }}"
+          oninput="this.nextElementSibling.value = this.value">
+        <output>{{ previous_evals.get(user.user, {}).get('git', 2) }}</output>
+      {% endfor %}
+      <br><br>
+      <button type="submit">Enviar Evaluaciones</button>
+    </form>
+  </div>
+</body>
+</html>
