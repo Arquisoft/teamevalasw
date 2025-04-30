@@ -20,7 +20,11 @@ def load_user_data():
 
 # Save evaluation
 def save_evaluation(evaluator, evaluations):
+    print("Evaluations")
+    print(evaluations)
+    print("DF")
     df = pd.DataFrame(evaluations)
+    print(df)
     df['evaluator'] = evaluator
     with FileLock(LOCK_FILE):
         file_exists = os.path.exists(EVALUATIONS_FILE)
@@ -57,9 +61,10 @@ def evaluate():
     previous_evals = {}
     with FileLock(LOCK_FILE):
         if os.path.exists(EVALUATIONS_FILE):
-            eval_df = pd.read_excel(EVALUATIONS_FILE)
+            eval_df = pd.read_excel(EVALUATIONS_FILE, keep_default_na=False)
             user_evals = eval_df[eval_df["evaluator"] == username]
             for _, row in user_evals.iterrows():
+                print(row["comment"])
                 previous_evals[row["evaluatee"]] = {
                     "respeto_empatia": row["respeto_empatia"],
                     "participacion": row["participacion"],
