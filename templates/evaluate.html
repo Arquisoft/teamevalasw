@@ -1,43 +1,93 @@
 <!doctype html>
 <html>
+
 <head>
   <title>Evaluar equipo</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
   <div class="container">
-    <h2>Evalua a tus miembros de equipo (Equipo: {{group_name}})</h2>
-    <img src="{{ url_for('static', filename='image.png') }}" alt="Info" class="info">
+    <h2>Evalúa a tus miembros de equipo (Equipo: {{group_name}})</h2>
+    <!--<img src="{{ url_for('static', filename='image.png') }}" alt="Info" class="info">-->
+    <table>
+      <tr>
+        <th></th>
+        <th>Muy bien</th>
+        <th>Bien</th>
+        <th>Regular</th>
+        <th>Mal</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>4</th>
+        <th>3</th>
+        <th>2</th>
+        <th>1</th>
+      </tr>
+      <tr>
+        <td class="name">Respeto y empatía</td>
+        <td>Siempre muestra respeto, escucha activa y considera las opiniones de los demás.</td>
+        <td>En general es respetuoso y escucha las opiniones de sus compañeros, aunque puede haber momentos de poca
+          atención.</td>
+        <td>A veces interrumpe y no siempre considera las ideas de otros.</td>
+        <td>Sus comentarios causan malestar o ignora a sus compañeros.</td>
+      </tr>
+      <tr>
+        <td class="name">Participación activa</td>
+        <td>Contribuye constantemente con ideas, preguntas y retroalimentación constructiva.</td>
+        <td>Participa con regularidad, pero puede ser más proactivo.</td>
+        <td>Participa ocasionalmente pero su contribución es limitada.</td>
+        <td>No participa o lo hace de manera muy pasiva.</td>
+      </tr>
+      <tr>
+        <td class="name">Cumplimiento de tareas</td>
+        <td>Completa todas sus tareas antes de los plazos y con alta calidad.</td>
+        <td>Completa la mayoría de las tareas, ero con pequeños retrasos o ajustes menores.</td>
+        <td>Entrega tareas incompletas o con retrasos que afectan el avance.</td>
+        <td>No cumple con las tareas asignadas o requiere constantes correcciones.</td>
+      </tr>
+      <tr>
+        <td class="name">Colaboración Git</td>
+        <td>Hace commits descriptivos, usa ramas correctamente y participa en revisiones de código.</td>
+        <td>Usa Git adecuadamente pero los commits pueden ser poco descriptivos o hace pocas PRs</td>
+        <td>Commits poco claros o dificulta el trabajo en equipo por mal uso de Git.</td>
+        <td>No sigue el flujo de trabajo o lo hace de manera incorrecta, causando conflictos.</td>
+      </tr>
+    </table>
+
     <form method="post">
       {% for user in group_users.itertuples() %}
-        <h3>{{ user.name }} {{ user.surname }}</h3>
-        <label>Respeto y empatía (1-4): </label>
-        <input type="range" name="respeto_{{ user.user }}" min="1" max="4"
-          value="{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}"
-          oninput="this.nextElementSibling.value = this.value">
-        <output>{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}</output>
-        
-        <label>Participación activa (1-4):</label>
-        <input type="range" name="participacion_{{ user.user }}" min="1" max="4"
-          value="{{ previous_evals.get(user.user, {}).get('participacion', 2) }}"
-          oninput="this.nextElementSibling.value = this.value">
-        <output>{{ previous_evals.get(user.user, {}).get('participacion', 2) }}</output>
-        <label>Cumplimiento de tareas (1-4):</label>
-        <input type="range" name="cumplimiento_{{ user.user }}" min="1" max="4"
-          value="{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}"
-          oninput="this.nextElementSibling.value = this.value">
-        <output>{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}</output>
-        <label>Colaboración en Git (1-4):</label>
-        <input type="range" name="git_{{ user.user }}" min="1" max="4"
-          value="{{ previous_evals.get(user.user, {}).get('git', 2) }}"
-          oninput="this.nextElementSibling.value = this.value">
-        <output>{{ previous_evals.get(user.user, {}).get('git', 2) }}</output>
-        <label>Comentario:</label>
-        <input type="text" style="width:100%" name="comment_{{ user.user }}" value="{{ previous_evals.get(user.user, {}).get('comment', '') }}"/>
+      <h3>{{ user.name }} {{ user.surname }}</h3>
+      <label>Respeto y empatía (1-4): </label>
+      <input type="range" name="respeto_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}</output>
+
+      <label>Participación activa (1-4):</label>
+      <input type="range" name="participacion_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('participacion', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('participacion', 2) }}</output>
+      <label>Cumplimiento de tareas (1-4):</label>
+      <input type="range" name="cumplimiento_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}</output>
+      <label>Colaboración en Git (1-4):</label>
+      <input type="range" name="git_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('git', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('git', 2) }}</output>
+      <label>Comentario:</label>
+      <input type="text" style="width:100%" name="comment_{{ user.user }}"
+        value="{{ previous_evals.get(user.user, {}).get('comment', '') }}" />
       {% endfor %}
       <br><br>
       <button type="submit">Enviar Evaluaciones</button>
     </form>
   </div>
 </body>
+
 </html>
