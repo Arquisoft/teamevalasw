@@ -4,11 +4,26 @@
 - users.txt. Una fila por cada usuario, en el formato usuario:pass.
 - data.xlsx. Hoja de cálculo con cuatro columnas. user (tiene que coincidir con un usuario del archivo anterior), name, surname, group.
 
+### Generación automática del archivo users.txt
+Podemos generar automáticamente el users.txt a partir del data.xlsx. Simplemente hay que ejecutar el script 
+
+```bash
+python generate_users_file.py
+``` 
+
 ### Como ejecutarlo
-- Crear un entorno virtual
-```python3 -m venv .venv```
+- Crear un entorno virtual y activarlo:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 - Instalar las dependencias
-```pip install -r requirements```
+```bash
+pip install -r requirements
+```
 
-- Ejecutar ```python app.py```
+- Ejecutar
+```bash
+python app.py
+```
