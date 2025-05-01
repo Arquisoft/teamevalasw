@@ -1,8 +1,9 @@
 ## Programa para la evaluación entre miembros del mismo grupo
 
 ### Archivos de configuración
-- users.txt. Una fila por cada usuario, en el formato usuario:pass.
-- data.xlsx. Hoja de cálculo con cuatro columnas. user (tiene que coincidir con un usuario del archivo anterior), name, surname, group.
+- **data.xlsx**. Hoja de cálculo con cuatro columnas. user (tiene que coincidir con un usuario del archivo anterior), name, surname, group (grupo al que pertenece el usuario).
+- **users.txt**. Una fila por cada usuario, en el formato usuario:pass (este archivo se puede generar automáticamente).
+
 
 ### Generación automática del archivo users.txt
 Podemos generar automáticamente el users.txt a partir del data.xlsx. Simplemente hay que ejecutar el script 
