@@ -57,6 +57,7 @@ def evaluate():
     user_row = data[data['user'] == username].iloc[0]
     group_users = data[(data['group'] == user_row['group']) & (data['user'] != username)]
     group_name = user_row['group']
+    group_language = user_row['language']
 
     previous_evals = {}
     with FileLock(LOCK_FILE):
@@ -88,8 +89,13 @@ def evaluate():
             evaluations.append(evaluation)
         save_evaluation(username, evaluations)
         return render_template('success.html')
+    
+    if group_language == "es":
+        template = "evaluate_es.html"
+    else:
+        template = "evaluate_en.html"
 
-    return render_template("evaluate.html", group_users=group_users, group_name=group_name, previous_evals=previous_evals)
+    return render_template(template, group_users=group_users, group_name=group_name, previous_evals=previous_evals)
 
 @app.route('/logout')
 def logout():
