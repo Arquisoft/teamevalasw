@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Team evaluations</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h2>Eval your team members (Team: {{group_name}})</h2>
+    <table>
+      <tr>
+        <th></th>
+        <th>Very good</th>
+        <th>Good</th>
+        <th>Normal</th>
+        <th>Bad</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>4</th>
+        <th>3</th>
+        <th>2</th>
+        <th>1</th>
+      </tr>
+      <tr>
+        <td class="name">Respect and empathy</td>
+        <td>Always show respect, listen actively, and consider the opinions of others.</td>
+        <td>In general, he is respectful and listens to his peers' opinions, although there may be moments of
+          inattention.</td>
+        <td>Sometimes he interrupts and doesn't always consider others' ideas.</td>
+        <td>His comments cause discomfort or he ignores his classmates.</td>
+      </tr>
+      <tr>
+        <td class="name">Active participation</td>
+        <td>He consistently contributes with ideas, questions, and constructive feedback.</td>
+        <td>He participates regularly, but could be more proactive.</td>
+        <td>He participates occasionally, but his contribution is limited.</td>
+        <td>He does not participate or does so in a very passive manner.</td>
+      </tr>
+      <tr>
+        <td class="name">Task Completion</td>
+        <td>Completes all tasks before deadlines and with high quality.</td>
+        <td>Completes most tasks, but with minor delays or small adjustments.</td>
+        <td>Submits incomplete tasks or with delays that impact progress.</td>
+        <td>Does not complete assigned tasks or requires constant corrections.</td>
+      </tr>
+      <tr>
+        <td class="name">Git collaboration</td>
+        <td>Makes descriptive commits, uses branches correctly, and participates in code reviews.</td>
+        <td>Uses Git appropriately, but commits may be unclear or submits few pull requests.</td>
+        <td>Commits are unclear or misuse of Git hinders teamwork.</td>
+        <td>Does not follow the workflow or does so incorrectly, causing conflicts.</td>
+      </tr>
+    </table>
+
+    <form method="post">
+      {% for user in group_users.itertuples() %}
+      <h3>{{ user.name }} {{ user.surname }}</h3>
+      <label>Respect and empathy (1-4): </label>
+      <input type="range" name="respeto_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('respeto_empatia', 2) }}</output>
+
+      <label>Active participation (1-4):</label>
+      <input type="range" name="participacion_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('participacion', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('participacion', 2) }}</output>
+
+      <label>Task completion (1-4):</label>
+      <input type="range" name="cumplimiento_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('cumplimiento', 2) }}</output>
+
+      <label>Git collaboration (1-4):</label>
+      <input type="range" name="git_{{ user.user }}" min="1" max="4"
+        value="{{ previous_evals.get(user.user, {}).get('git', 2) }}"
+        oninput="this.nextElementSibling.value = this.value">
+      <output>{{ previous_evals.get(user.user, {}).get('git', 2) }}</output>
+
+      <label>Comment:</label>
+      <input type="text" style="width:100%" name="comment_{{ user.user }}"
+        value="{{ previous_evals.get(user.user, {}).get('comment', '') }}" />
+      {% endfor %}
+      <br><br>
+      <button type="submit">Submit evaluations</button>
+    </form>
+  </div>
+</body>
+
+</html>
