@@ -5,12 +5,12 @@
 - **data.xlsx**. Hoja de cálculo con cuatro columnas. user (tiene que coincidir con un usuario del archivo anterior), name, surname, group (grupo al que pertenece el usuario), language (en ó es).
 - **users.txt**. Una fila por cada usuario, en el formato usuario:pass (este archivo se puede generar automáticamente).
 
-### Generación automática del archivo users.txt
+### Generación automática de los archivos necesarios
 
-Podemos generar automáticamente el users.txt a partir del data.xlsx. Simplemente hay que ejecutar el script
+Podemos generar todo lo necesario a partir de la hoja de cálculo con los alumnos. Simplemente hay que ejecutar el script
 
 ```bash
-python generate_users_file.py
+python generate_data_files.py
 ```
 
 ### Como ejecutarlo
