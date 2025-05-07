@@ -13,6 +13,11 @@ Podemos generar todo lo necesario a partir de la hoja de cálculo con los alumno
 python generate_data_files.py
 ```
 
+Esto generará cuatro archivos:
+- data.xlsx. Con la información principal de los alumnos y sus grupos.
+- users.txt. Archivo para la autenticación de la web.
+- en.csv y es.csv. Archivos útiles para generar los correos a enviar a los alumnos.
+
 ### Como ejecutarlo
 
 - Crear un entorno virtual y activarlo:
